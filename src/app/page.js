@@ -1,12 +1,31 @@
-import Image from "next/image";
-import styles from "./page.module.css";
-import Link from "next/link";
+"use client"
+import Link from 'next/link'
+import styles from './page.module.css'
+import {useRouter} from 'next/navigation'
+
 
 export default function Home() {
+  const router = useRouter();
+  const navigate=(name)=>{
+    router.push(name)
+  }
   return (
-    <div className={styles.page}>
-      <h1>Homepage</h1>
-      <Link href="/login">Go to login</Link>
-      </div>
-  );
+    <main>
+     <h1>Dynamic Routing</h1> 
+     <Link href="/login" >Go to Login Page</Link>
+     <br />
+     <br />
+     <Link href="/about" >Go to About Page</Link>
+     <br />
+     <br />
+     <button onClick={()=>navigate("/login")} >Go to Login Page</button>
+     <br />
+     <br />
+     <button onClick={()=>navigate("/about")} >Go to About Page</button>
+     <br />
+     <br />
+     <button onClick={()=>navigate("/productlist")} >Go to product</button>
+    </main>
+  )
 }
+
