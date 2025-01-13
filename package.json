@@ -1,11 +1,16 @@
 {
+<<<<<<< HEAD
   "name": "expense-tracker-nextjs",
+=======
+  "name": "nextjs",
+>>>>>>> 5da840a157c8576f05cc36e586e83f6bfe1d5f3f
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+<<<<<<< HEAD
     "lint": "next lint",
     "postinstall": "prisma generate"
   },
@@ -23,5 +28,18 @@
     "@types/react-dom": "^18",
     "prisma": "^5.15.1",
     "typescript": "^5"
+=======
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "next": "15.1.0"
+  },
+  "devDependencies": {
+    "eslint": "^9",
+    "eslint-config-next": "15.1.0",
+    "@eslint/eslintrc": "^3"
+>>>>>>> 5da840a157c8576f05cc36e586e83f6bfe1d5f3f
   }
 }
