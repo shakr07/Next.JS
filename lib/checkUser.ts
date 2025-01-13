@@ -1,35 +1,38 @@
-import { currentUser } from '@clerk/nextjs/server';
-import { db } from '@/lib/db';
+import { currentUser } from "@clerk/nextjs/server";
+import { PrismaClient } from "@prisma/client";
 
-export const checkUser = async () => {
-  const user = await currentUser();
+// Initialize Prisma Client
+const prisma = new PrismaClient();
+export  const checkUser=async()=>{
+    const user=await currentUser();
+    console.log(user);
+    //check for current logged in clerk user
 
-  // Check for current logged in clerk user
-  if (!user) {
-    return null;
-  }
+    if(!user){
+        return null
+    }
+    //check if the user alread in the database or not
 
-  // Check if the user is already in the database
-  const loggedInUser = await db.user.findUnique({
-    where: {
-      clerkUserId: user.id,
-    },
-  });
+    const loggerUser=await prisma.user.findUnique({
+        where:{
+          clerkUserId:user.id
+        }
+    })
+    
 
-  // If user is in database, return user
-  if (loggedInUser) {
-    return loggedInUser;
-  }
+    //if the user in the database then reaturn database
+    if(loggerUser){
+        return loggerUser
+    }
 
-  // If not in database, create new user
-  const newUser = await db.user.create({
-    data: {
-      clerkUserId: user.id,
-      name: `${user.firstName} ${user.lastName}`,
-      imageUrl: user.imageUrl,
-      email: user.emailAddresses[0].emailAddress,
-    },
-  });
+    //if not in database the create
+    const newUser=await prisma.user.create({
 
-  return newUser;
-};
+        data:{
+          clerkUserId:user.id,
+            name:`${user.firstName} ${user.lastName}`,
+            imageUrl:user.imageUrl,
+            email:user.emailAddresses[0].emailAddress,
+        }
+    })
+}
